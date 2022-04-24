@@ -2,6 +2,16 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs')
 const app = express();
+const notes = require('./db/db.json');
+const { v4: uuidv4 } = require('uuid');
+
+
+// const {
+//     getNotes,
+//     saveNote,
+//     renderActiveNote,
+//     handleNoteSave,
+// } = require('./public/assets/js');
 
 //middle-ware
 app.use(express.urlencoded({ extended: true }));
@@ -11,12 +21,15 @@ const PORT = process.env.PORT || 3001;
 
 
 app.get('/notes', (req, res) => {
+    let results = notes;
     res.sendFile(path.join(__dirname, './public/notes.html'));
+   
 });
 
 app.get('/api/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, './db/db.json'));
     let results = notes;
+    res.sendFile(path.join(__dirname, './db/db.json'));
+    
 });
 
 app.post( '/api/notes' , (req,res) => {
@@ -24,15 +37,26 @@ app.post( '/api/notes' , (req,res) => {
 
     fs.readFile('./db/db.json', (err , data ) => {
         var apiPost = req.body;
-        let userInput = JSON.parse(data);
-        userInput.push(apiPost);
+        let oldData = JSON.parse(data);
+        oldData.push(apiPost);
+
+        //add an id to an object
+        apiPost.id= uuidv4();
+
     
         
         console.log(apiPost)
-        fs.writeFile('./db/db.json' , (err ) => {
-            // apiPost()
+        fs.writeFile('./db/db.json' , JSON.stringify(oldData) , (err ) => {
+            if (err) throw err;
+
             
-        })
+            console.log('The file has been saved.')
+
+            res.json(oldData)
+            
+            
+        });
+        
     });
 
 

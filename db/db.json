@@ -1,6 +1,1 @@
-[
-    {
-        "title":"Test Title",
-        "text":"Test text"
-    }
-]
+[{"title":"Test Title","text":"Test text"},{"title":"Note 7","text":"Note #7\n"},{"title":"new post","text":"new text","id":"e249c95a-aba8-4523-9744-f43aedd9a552"},{"title":"new post","text":"new text","id":"23abb868-5613-404d-95cb-9e54dab01d7f"},{"title":"New Title","text":"No save button\n","id":"e856eece-00f1-4130-84ee-5dc6f1e9fdb4"},{"title":"Testing if it works","text":"It works!!","id":"fa2d08aa-91c7-42cf-85f7-76c3c9fc2b06"},{"title":"Test Title","text":"Test text","id":"d4e11ed7-1eba-41ce-8df9-454734b9860c"}]
