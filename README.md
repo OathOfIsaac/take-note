@@ -1,2 +1,1 @@
-# take-note
-Note taking app.
+# Note Taker Starter Code
