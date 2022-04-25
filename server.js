@@ -62,6 +62,37 @@ app.post( '/api/notes' , (req,res) => {
 
 });
 
+app.delete( '/api/notes/:id', (req , res) => {
+    var id = req.params.id;
+    console.log(req.params.id)
+
+    //grabbing the oldData
+    fs.readFile('./db/db.json', (err , data ) => {
+       
+        let oldData = JSON.parse(data);
+        let filterData = oldData.filter( 
+            function(note) {
+                return note.id != id 
+            })
+        
+
+    
+        
+        
+        fs.writeFile('./db/db.json' , JSON.stringify(filterData) , (err ) => {
+            if (err) throw err;
+
+            
+            console.log('The file has been saved.')
+
+            res.json(oldData)
+            
+            
+        });
+        
+    });
+})
+
 app.get('*' , (req, res) => {
     res.sendFile(path.join(__dirname, './public/index.html'));
 });
